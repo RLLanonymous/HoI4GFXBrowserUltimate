@@ -4,10 +4,10 @@ import { FaGithub } from "react-icons/fa";
 import { FiBookOpen, FiInfo } from "react-icons/fi";
 
 const stats = [
-  { value: "384", label: "total assets", color: "#f0f0f0" },
-  { value: "256", label: "vanilla", color: "#f0f0f0" },
-  { value: "128", label: "mod", color: "#8c5cff" },
-  { value: "7", label: "nations", color: "#f0f0f0" },
+  { value: "0", label: "total assets", color: "#f0f0f0" },
+  { value: "0", label: "vanilla", color: "#f0f0f0" },
+  { value: "0", label: "mod", color: "#8c5cff" },
+  { value: "0", label: "nations", color: "#f0f0f0" },
 ];
 
 const links = [
@@ -35,7 +35,7 @@ export default function StatsBar() {
           GFX Browser Ultimate
         </span>
         <span style={{ color: '#525252', fontSize: '11px' }}>
-          © 2025 — All rights reserved
+          © 2026 — All rights reserved
         </span>
       </div>
 

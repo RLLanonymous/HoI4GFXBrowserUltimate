@@ -1,12 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { FiSearch, FiMonitor, FiBookOpen, FiGitBranch, FiInfo, FiMenu, FiX } from "react-icons/fi";
+import { FiSearch, FiBookOpen, FiGitBranch, FiInfo, FiMenu, FiX} from "react-icons/fi";
 import { FaGithub } from "react-icons/fa";
 import { useState } from "react";
+import { AiFillFolderOpen } from "react-icons/ai";
 
 const links = [
-  { label: "Browse", icon: FiMonitor },
+  { label: "Browse", icon: AiFillFolderOpen },
   { label: "Docs", icon: FiBookOpen },
   { label: "Changelog", icon: FiGitBranch },
   { label: "About", icon: FiInfo },
@@ -24,8 +26,7 @@ export default function Navbar() {
         >
           {/* Logo */}
           <span className="font-bold text-base tracking-tight whitespace-nowrap">
-            GFX <span className="text-[#8c5cff]">Browser</span>{" "}
-            <span className="text-[#525252]">Ultimate</span>
+            GFX <span className="text-[#8c5cff]">Browser Ultimate</span>{" "}
           </span>
 
           {/* Links desktop */}
@@ -51,8 +52,10 @@ export default function Navbar() {
               </kbd>
             </div>
             <Button size="sm" className="h-9 px-4 text-[12px] bg-[#8c5cff] hover:bg-[#7033ff] border-0 text-white rounded-full flex items-center gap-2">
+              <Link href="https://github.com/RLLanonymous/HoI4GFXBrowserUltimate" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
               <FaGithub size={13} />
-              Contribute
+                    Contribute
+              </Link>
             </Button>
           </div>
 
@@ -86,10 +89,16 @@ export default function Navbar() {
             <FiSearch size={13} />
             <span>Search assets...</span>
           </div>
-          <Button size="sm" className="h-9 text-[12px] bg-[#8c5cff] hover:bg-[#7033ff] border-0 text-white rounded-full flex items-center justify-center gap-2 mt-1">
-            <FaGithub size={13} />
-            Contribute
-          </Button>
+            <Button
+              asChild
+              size="sm"
+              className="h-9 text-[12px] bg-[#8c5cff] hover:bg-[#7033ff] border-0 text-white rounded-full flex items-center justify-center gap-2 mt-1"
+            >
+              <Link href="https://github.com/RLLanonymous/HoI4GFXBrowserUltimate">
+                <FaGithub size={13} />
+                Contribute
+              </Link>
+            </Button>
         </div>
       )}
     </>
