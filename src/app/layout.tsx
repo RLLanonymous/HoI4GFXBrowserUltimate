@@ -1,25 +1,19 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-});
+const fontSans = Geist({ subsets: ["latin"], variable: "--font-sans" });
+const fontMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
-  title: "HOI4 GFX Browser",
-  description: "Browse Hearts of Iron IV GFX assets",
+  title: "HoI4 GFX Browser Ultimate",
+  description: "A GFX Browser for Vanilla And Modded HoI4 GFX.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className="dark">
-      <body className={`${jetbrainsMono.variable} font-mono antialiased`}>
+    <html lang="en" className="dark">
+      <body className={`${fontSans.variable} ${fontMono.variable} antialiased`}>
         {children}
       </body>
     </html>

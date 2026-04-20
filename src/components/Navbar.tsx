@@ -2,16 +2,18 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { FiSearch, FiBookOpen, FiGitBranch, FiInfo, FiMenu, FiX} from "react-icons/fi";
+import { FiBookOpen, FiInfo, FiMenu, FiX } from "react-icons/fi";
 import { FaGithub } from "react-icons/fa";
 import { useState } from "react";
 import { AiFillFolderOpen } from "react-icons/ai";
+import SearchBar from "@/components/SearchBar";
+
+const GITHUB_URL = "https://github.com/RLLanonymous/HoI4GFXBrowserUltimate";
 
 const links = [
-  { label: "Browse", icon: AiFillFolderOpen },
-  { label: "Docs", icon: FiBookOpen },
-  { label: "Changelog", icon: FiGitBranch },
-  { label: "About", icon: FiInfo },
+  { label: "Browse", href: "/browse", icon: AiFillFolderOpen },
+  { label: "Docs", href: "/docs", icon: FiBookOpen },
+  { label: "About", href: "/about", icon: FiInfo },
 ];
 
 export default function Navbar() {
@@ -21,47 +23,45 @@ export default function Navbar() {
     <>
       <div className="flex justify-center pt-5 px-4 xl:px-8 z-50">
         <nav
-          className="relative flex items-center justify-between px-5 xl:px-8 h-14 rounded-full border border-[#32343b] w-full"
-          style={{ backdropFilter: 'blur(12px)', background: 'rgba(14,11,26,0.5)' }}
+          className="relative flex items-center justify-between px-5 xl:px-8 h-14 rounded-lg border border-[#242424] w-full"
+          style={{ backdropFilter: "blur(12px)", background: "rgba(0,0,0,0.6)" }}
         >
-          {/* Logo */}
-          <span className="font-bold text-base tracking-tight whitespace-nowrap">
-            GFX <span className="text-[#8c5cff]">Browser Ultimate</span>{" "}
+          <span className="font-mono flex items-center gap-2">
+            <span className="text-[#525252] text-sm">Lanonymous /</span>
+            <span className="font-bold text-base text-white">GFX Browser</span>
+            <span className="text-[10px] bg-white text-black px-2 py-0.5 rounded-sm font-bold tracking-wider">ULTIMATE</span>
           </span>
 
-          {/* Links desktop */}
           <div className="absolute left-1/2 -translate-x-1/2 hidden xl:flex items-center gap-1 text-[13px]">
-            {links.map(({ label, icon: Icon }) => (
-              <span
+            {links.map(({ label, href, icon: Icon }) => (
+              <Link
                 key={label}
-                className="flex items-center justify-center gap-2 text-[#a0a0a0] hover:text-[#8c5cff] hover:bg-[#8c5cff]/10 transition-all cursor-pointer px-4 py-2 rounded-full leading-none"
+                href={href}
+                className="flex items-center gap-2 text-[#a4a4a4] hover:text-white hover:bg-white/10 transition-all cursor-pointer px-4 py-2 rounded-md leading-none"
               >
                 <Icon size={14} className="shrink-0" />
                 <span className="leading-none">{label}</span>
-              </span>
+              </Link>
             ))}
           </div>
 
-          {/* Right desktop */}
           <div className="hidden xl:flex items-center gap-3">
-            <div className="flex items-center gap-2 border border-[#32343b] rounded-full px-5 h-9 text-[12px] text-[#525252] cursor-pointer hover:border-[#8c5cff] transition-colors w-56">
-              <FiSearch size={13} />
-              <span>Search assets...</span>
-              <kbd className="ml-auto text-[9px] text-[#a0a0a0] bg-[#1e1e24] border border-[#3a3a45] rounded px-1.5 py-0.5 shadow-[inset_0_-2px_0_#111116] font-mono tracking-wider">
-                Ctrl K
-              </kbd>
-            </div>
-            <Button size="sm" className="h-9 px-4 text-[12px] bg-[#8c5cff] hover:bg-[#7033ff] border-0 text-white rounded-full flex items-center gap-2">
-              <Link href="https://github.com/RLLanonymous/HoI4GFXBrowserUltimate" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-              <FaGithub size={13} />
-                    Contribute
+            <SearchBar placeholder="Search documentation..." />
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-9 px-4 text-[12px] rounded-md border-[#242424] bg-transparent text-white hover:bg-white/10 hover:text-white gap-2 font-mono"
+              asChild
+            >
+              <Link href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+                <FaGithub size={13} />
+                Contribute
               </Link>
             </Button>
           </div>
 
-          {/* Burger */}
           <button
-            className="xl:hidden text-[#a0a0a0] hover:text-[#8c5cff] transition-colors"
+            className="xl:hidden text-[#a4a4a4] hover:text-white transition-colors cursor-pointer"
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <FiX size={20} /> : <FiMenu size={20} />}
@@ -69,36 +69,38 @@ export default function Navbar() {
         </nav>
       </div>
 
-      {/* Mobile Menu */}
       {menuOpen && (
         <div
-          className="xl:hidden mx-4 mt-2 rounded-2xl border border-[#32343b] p-4 flex flex-col gap-2 z-40"
-          style={{ backdropFilter: 'blur(12px)', background: 'rgba(14,11,26,0.9)' }}
+          className="xl:hidden mx-4 mt-2 rounded-lg border border-[#242424] p-4 flex flex-col gap-2 z-40"
+          style={{ backdropFilter: "blur(12px)", background: "rgba(0,0,0,0.9)" }}
         >
-          {links.map(({ label, icon: Icon }) => (
-            <span
+          {links.map(({ label, href, icon: Icon }) => (
+            <Link
               key={label}
-              className="flex items-center gap-3 text-[#a0a0a0] hover:text-[#8c5cff] hover:bg-[#8c5cff]/10 transition-all cursor-pointer px-4 py-3 rounded-xl text-[13px]"
+              href={href}
+              className="flex items-center gap-3 text-[#a4a4a4] hover:text-white hover:bg-white/10 transition-all cursor-pointer px-4 py-3 rounded-md text-[13px]"
             >
               <Icon size={15} />
               {label}
-            </span>
+            </Link>
           ))}
-          <div className="border-t border-[#32343b] my-2" />
-          <div className="flex items-center gap-2 border border-[#32343b] rounded-full px-4 h-9 text-[12px] text-[#525252]">
-            <FiSearch size={13} />
-            <span>Search assets...</span>
+          <div className="border-t border-[#242424] my-2" />
+          <div className="w-full">
+            <SearchBar placeholder="Search..." className="w-full" />
           </div>
+          <div className="flex gap-2 mt-1">
             <Button
-              asChild
+              variant="outline"
               size="sm"
-              className="h-9 text-[12px] bg-[#8c5cff] hover:bg-[#7033ff] border-0 text-white rounded-full flex items-center justify-center gap-2 mt-1"
+              className="flex-1 h-9 text-[12px] rounded-md border-[#242424] bg-transparent text-white hover:bg-white/10 gap-2"
+              asChild
             >
-              <Link href="https://github.com/RLLanonymous/HoI4GFXBrowserUltimate">
+              <Link href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
                 <FaGithub size={13} />
                 Contribute
               </Link>
             </Button>
+          </div>
         </div>
       )}
     </>

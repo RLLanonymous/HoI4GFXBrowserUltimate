@@ -1,78 +1,54 @@
 "use client";
 
+import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 import { FiBookOpen, FiInfo } from "react-icons/fi";
 
 const stats = [
-  { value: "0", label: "total assets", color: "#f0f0f0" },
-  { value: "0", label: "vanilla", color: "#f0f0f0" },
-  { value: "0", label: "mod", color: "#8c5cff" },
-  { value: "0", label: "nations", color: "#f0f0f0" },
+  { value: "0", label: "total assets", color: "#ffffff" },
+  { value: "0", label: "vanilla", color: "#ffffff" },
+  { value: "0", label: "mod", color: "#ffffff" },
+  { value: "0", label: "nations", color: "#ffffff" },
 ];
 
-const links = [
-  { label: "GitHub", icon: FaGithub },
-  { label: "Docs", icon: FiBookOpen },
-  { label: "About", icon: FiInfo },
+const footerLinks = [
+  { label: "GitHub", icon: FaGithub, href: "https://github.com/RLLanonymous/HoI4GFXBrowserUltimate" },
+  { label: "Docs", icon: FiBookOpen, href: "#" },
+  { label: "About", icon: FiInfo, href: "#" },
 ];
 
 export default function StatsBar() {
   return (
     <div
-      style={{
-        borderTop: '1px solid rgba(50,52,59,0.6)',
-        backdropFilter: 'blur(12px)',
-        background: 'rgba(14,11,26,0.5)',
-        padding: '20px 40px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}
+      className="relative z-10 border-t border-[#242424]/60 px-8 py-5 flex items-center justify-between font-mono"
+      style={{ backdropFilter: "blur(12px)", background: "rgba(0,0,0,0.4)" }}
     >
-      {/* Left branding */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-        <span style={{ color: '#f0f0f0', fontSize: '13px', fontWeight: 600 }}>
-          GFX Browser Ultimate
-        </span>
-        <span style={{ color: '#525252', fontSize: '11px' }}>
-          © 2026 — All rights reserved
-        </span>
+      <div className="flex flex-col gap-1">
+        <span className="text-[13px] font-semibold text-white">GFX Browser Ultimate</span>
+        <span className="text-[11px] text-[#525252]">© 2026 — All rights reserved</span>
       </div>
 
-      {/* Center stats */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+      <div className="flex items-center gap-8">
         {stats.map((s, i) => (
-          <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
-            <span style={{ color: s.color, fontSize: '20px', fontWeight: 700, lineHeight: 1 }}>
-              {s.value}
-            </span>
-            <span style={{ color: '#525252', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-              {s.label}
-            </span>
+          <div key={i} className="flex flex-col items-center gap-1">
+            <span className="text-[20px] font-bold leading-none text-white">{s.value}</span>
+            <span className="text-[10px] uppercase tracking-[0.1em] text-[#525252]">{s.label}</span>
           </div>
         ))}
       </div>
 
-      {/* Right links */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-        {links.map(({ label, icon: Icon }) => (
-          <span
+      <div className="flex items-center gap-5">
+        {footerLinks.map(({ label, icon: Icon, href }) => (
+          <Link
             key={label}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              color: '#525252',
-              fontSize: '12px',
-              cursor: 'pointer',
-              transition: 'color 0.2s',
-            }}
-            onMouseEnter={e => (e.currentTarget as HTMLSpanElement).style.color = '#f0f0f0'}
-            onMouseLeave={e => (e.currentTarget as HTMLSpanElement).style.color = '#525252'}
+            href={href}
+            target={href.startsWith("http") ? "_blank" : undefined}
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-[12px] text-[#525252] hover:text-white transition-colors cursor-pointer"
           >
             <Icon size={13} />
             {label}
-          </span>
+          </Link>
         ))}
       </div>
     </div>
