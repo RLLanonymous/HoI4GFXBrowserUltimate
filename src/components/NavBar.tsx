@@ -16,7 +16,7 @@ const links = [
   { label: "About", href: "/about", icon: FiInfo },
 ];
 
-export default function Navbar() {
+export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
