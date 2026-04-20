@@ -4,7 +4,7 @@ import { useState } from "react";
 import GFXGrid from "@/components/GFXGrid";
 import { FiSearch } from "react-icons/fi";
 
-const GFX_TYPES = ["All", "focus", "ideas", "ideology", "portrait"];
+const GFX_TYPES = ["All", "focus", "ideas", "ideology", "portrait", "flags"];
 const COUNTRY_TAGS = ["All", "GER", "FRA", "ENG", "SOV", "USA", "ITA", "JAP"];
 const SOURCES = ["All", "Vanilla", "DLC", "Mod"];
 
@@ -124,7 +124,7 @@ export default function BrowseClient() {
             Browse Assets
           </h1>
           <p style={{ fontSize: '12px', color: '#525252' }}>
-            Focus icons, portraits, sprites and ideologies — vanilla &amp; mods.
+            Focus icons, portraits, sprites and ideologies. Vanilla &amp; mods.
           </p>
         </div>
 

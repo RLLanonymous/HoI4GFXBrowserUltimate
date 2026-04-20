@@ -4,7 +4,7 @@ import StatsBar from "@/components/StatsBar";
 import BrowseClient from "@/components/BrowseClient";
 
 export const metadata = {
-  title: "Browse — HoI4 GFX Browser Ultimate",
+  title: "HoI4 GFX Browser Ultimate (In Browser)",
   description: "Browse GFX assets from Vanilla and Modded HoI4.",
 };
 
