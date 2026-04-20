@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node scripts/build-index.mjs && next dev",
+    "build": "node scripts/build-index.mjs && next build",
+    "build:index": "node scripts/build-index.mjs",
     "start": "next start",
     "lint": "eslint"
   },

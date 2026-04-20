@@ -1,5 +1,6 @@
 "use client";
 
+import { Kbd, KbdGroup } from "@/components/ui/kbd"
 import { FiSearch } from "react-icons/fi";
 
 export default function SearchBar({ placeholder = "Search...", className = "" }: { placeholder?: string; className?: string }) {
@@ -11,9 +12,9 @@ export default function SearchBar({ placeholder = "Search...", className = "" }:
         placeholder={placeholder}
         className="flex-1 bg-transparent text-white text-[12px] placeholder:text-[#525252] outline-none border-none font-mono"
       />
-      <kbd className="text-[10px] text-[#a4a4a4] bg-[#1d1d1d] border border-[#333] border-b-2 rounded-sm px-1.5 py-0.5 font-mono shrink-0">
-        Ctrl + K
-      </kbd>
+      <KbdGroup>
+        <Kbd>Ctrl + K</Kbd>
+      </KbdGroup>
     </div>
   );
 }
