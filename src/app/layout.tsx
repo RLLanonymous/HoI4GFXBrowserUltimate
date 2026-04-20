@@ -12,7 +12,7 @@ export const metadata = {
   openGraph: {
     title: "HoI4 GFX Browser Ultimate",
     description: "Browse vanilla & mod GFX assets for HOI4.",
-    url: "https://rllanonymous.is-a.dev",
+    url: "https://rllanonymous.is-a.dev/HoI4GFXBrowserUltimate/",
     siteName: "GFX Browser Ultimate",
   },
 };
