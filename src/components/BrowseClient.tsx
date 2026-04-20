@@ -30,7 +30,6 @@ export default function BrowseClient() {
       {/* Sidebar */}
       <aside style={{
         width: '200px',
-        shrink: 0,
         borderRight: '1px solid #242424',
         padding: '24px 16px',
         display: 'flex',
