@@ -49,7 +49,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build with Next.js
+      - name: Build index
+        run: node scripts/build-index.mjs
+
+      - name: Build Next.js
         run: pnpm run build
 
       - name: Check exported files

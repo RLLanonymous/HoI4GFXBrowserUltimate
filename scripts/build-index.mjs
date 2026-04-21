@@ -3,8 +3,10 @@ import { join, relative } from 'path'
 
 const GFX_DIR = join(process.cwd(), 'public/gfx')
 const OUTPUT = join(process.cwd(), 'public/gfx/index.info.json')
-
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const BASE_PATH =
+  process.env.NODE_ENV === "production"
+    ? "/HoI4GFXBrowserUltimate"
+    : ""
 
 const entries = []
 
@@ -38,6 +40,7 @@ function walk(dir) {
 
 walk(GFX_DIR)
 
+// ensure directory exists implicitly via public/
 writeFileSync(OUTPUT, JSON.stringify(entries, null, 2))
 
 console.log(`[✓] index.info.json generated`)
