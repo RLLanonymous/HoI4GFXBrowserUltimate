@@ -1,11 +1,17 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
+
+const repo = process.env.NEXT_PUBLIC_BASE_PATH || ""
 
 const nextConfig: NextConfig = {
   output: "export",
-  images: { unoptimized: true },
-  experimental: {
-    globalNotFound: true,
+  basePath: repo,
+  assetPrefix: repo,
+  images: {
+    unoptimized: true,
   },
-};
+  experimental: {
+  globalNotFound: true,
+   },
+}
 
-export default nextConfig;
+export default nextConfig

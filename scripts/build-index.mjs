@@ -1,33 +1,45 @@
-import { readdirSync, writeFileSync, statSync } from 'fs';
-import { join, relative } from 'path';
+import { readdirSync, writeFileSync, statSync } from 'fs'
+import { join, relative } from 'path'
 
-const GFX_DIR = './public/gfx';
-const OUTPUT = './public/gfx/index.info.json';
+const GFX_DIR = join(process.cwd(), 'public/gfx')
+const OUTPUT = join(process.cwd(), 'public/gfx/index.info.json')
 
-const entries = [];
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+
+const entries = []
 
 function walk(dir) {
   for (const entry of readdirSync(dir)) {
-    const full = join(dir, entry);
+    const full = join(dir, entry)
+
     if (statSync(full).isDirectory()) {
-      walk(full);
-    } else if (entry.endsWith('.info.json') && entry !== 'index.info.json') {
-      const rel = relative(GFX_DIR, full).replace(/\\/g, '/');
-      const parts = rel.split('/');
-      const type = parts[0];
-    const country_tag = parts[1];
-    const basename = entry.replace('.info.json', '');
+      walk(full)
+      continue
+    }
+
+    if (!entry.endsWith('.info.json')) continue
+    if (entry === 'index.info.json') continue
+
+    const rel = relative(GFX_DIR, full).replace(/\\/g, '/')
+    const parts = rel.split('/')
+
+    const type = parts[0]
+    const country_tag = parts[1]
+    const basename = entry.replace('.info.json', '')
 
     entries.push({
-    info: `/gfx/${type}/${country_tag}/${entry}`,
-    image: `/gfx/${type}/${country_tag}/${basename}.png`,
-    type,
-    country_tag,
-        });
-    }
+      type,
+      country_tag,
+      info: `${BASE_PATH}/gfx/${type}/${country_tag}/${entry}`,
+      image: `${BASE_PATH}/gfx/${type}/${country_tag}/${basename}.png`,
+    })
   }
 }
 
-walk(GFX_DIR);
-writeFileSync(OUTPUT, JSON.stringify(entries, null, 2));
-console.log(`[✓] index.info.json has been generated! ${entries.length} Assets generated !`);
+walk(GFX_DIR)
+
+writeFileSync(OUTPUT, JSON.stringify(entries, null, 2))
+
+console.log(`[✓] index.info.json generated`)
+console.log(`→ ${entries.length} assets indexed`)
+console.log(`→ output: ${OUTPUT}`)

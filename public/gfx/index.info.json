@@ -1,14 +1,14 @@
 [
   {
-    "info": "/gfx/flags/SOV/RUS_tsardom.info.json",
-    "image": "/gfx/flags/SOV/RUS_tsardom.png",
     "type": "flags",
-    "country_tag": "SOV"
+    "country_tag": "SOV",
+    "info": "/gfx/flags/SOV/RUS_tsardom.info.json",
+    "image": "/gfx/flags/SOV/RUS_tsardom.png"
   },
   {
-    "info": "/gfx/focus/GER/ger_great_red_menace.info.json",
-    "image": "/gfx/focus/GER/ger_great_red_menace.png",
     "type": "focus",
-    "country_tag": "GER"
+    "country_tag": "GER",
+    "info": "/gfx/focus/GER/ger_great_red_menace.info.json",
+    "image": "/gfx/focus/GER/ger_great_red_menace.png"
   }
 ]
