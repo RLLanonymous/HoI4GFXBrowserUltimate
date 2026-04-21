@@ -2,11 +2,9 @@
 
 import { useEffect, useState } from "react"
 import GFXCard from "./GFXCard"
+import { BASE_PATH } from "../../config/site"
 
-const BASE_PATH =
-  process.env.NODE_ENV === "production"
-    ? "/HoI4GFXBrowserUltimate"
-    : ""
+fetch(`${BASE_PATH}/gfx/index.info.json`)
 
 interface IndexEntry {
   info: string

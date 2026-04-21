@@ -1,9 +1,7 @@
 "use client"
 
-const BASE_PATH =
-  process.env.NODE_ENV === "production"
-    ? "/HoI4GFXBrowserUltimate"
-    : ""
+import { BASE_PATH } from "../../config/site"
+
 
 interface GFXCardProps {
   name: string
@@ -39,9 +37,10 @@ export default function GFXCard({
         border: "rgba(113,113,122,0.2)",
       }
 
-  const finalImage = image.startsWith("http")
-    ? image
-    : `${BASE_PATH}${image}`
+    const finalImage =
+        image.startsWith("http") || image.startsWith(BASE_PATH)
+          ? image
+          : `${BASE_PATH}${image}`
 
   return (
     <div

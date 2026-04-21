@@ -1,1 +1,1 @@
-export const BASE_PATH = "/HoI4GFXBrowserUltimate"
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ""

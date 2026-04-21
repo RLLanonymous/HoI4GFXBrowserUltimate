@@ -50,10 +50,10 @@ jobs:
         run: pnpm install
 
       - name: Build index
-        run: node scripts/build-index.mjs
+        run: BASE_PATH=/HoI4GFXBrowserUltimate node scripts/build-index.mjs
 
       - name: Build Next.js
-        run: pnpm run build
+        run: NEXT_PUBLIC_BASE_PATH=/HoI4GFXBrowserUltimate pnpm next build
 
       - name: Check exported files
         run: |
