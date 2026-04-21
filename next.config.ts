@@ -1,5 +1,4 @@
 import type { NextConfig } from "next"
-import { BASE_PATH } from "./config/site"
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ""
 
