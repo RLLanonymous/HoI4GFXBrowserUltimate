@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { FiBookOpen, FiInfo, FiMenu, FiX } from "react-icons/fi";
+import { FiBookOpen, FiHome, FiInfo, FiMenu, FiX } from "react-icons/fi";
 import { FaGithub } from "react-icons/fa";
 import { useState } from "react";
 import { AiFillFolderOpen } from "react-icons/ai";
@@ -11,6 +11,7 @@ import SearchBar from "@/components/SearchBar";
 const GITHUB_URL = "https://github.com/RLLanonymous/HoI4GFXBrowserUltimate";
 
 const links = [
+  { label: "Home", href: "/", icon: FiHome },
   { label: "Browse", href: "/browse", icon: AiFillFolderOpen },
   { label: "Docs", href: "/docs", icon: FiBookOpen },
   { label: "About", href: "/about", icon: FiInfo },

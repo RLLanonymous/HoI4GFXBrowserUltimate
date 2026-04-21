@@ -9,35 +9,35 @@ interface GFXCardProps {
 
 export default function GFXCard({ name, image, IsDLC, IsMod }: GFXCardProps) {
   const badge = IsMod
-    ? { label: 'MOD', color: '#8c5cff', bg: 'rgba(140,92,255,0.12)', border: 'rgba(140,92,255,0.3)' }
+    ? { label: 'MOD', color: '#a78bfa', bg: 'rgba(167,139,250,0.08)', border: 'rgba(167,139,250,0.2)' }
     : IsDLC
-    ? { label: 'DLC', color: '#31e183', bg: 'rgba(49,225,131,0.12)', border: 'rgba(49,225,131,0.3)' }
-    : { label: 'Vanilla', color: '#a0a0a0', bg: 'rgba(160,160,160,0.08)', border: 'rgba(160,160,160,0.2)' };
+    ? { label: 'DLC', color: '#34d399', bg: 'rgba(52,211,153,0.08)', border: 'rgba(52,211,153,0.2)' }
+    : { label: 'Vanilla', color: '#71717a', bg: 'rgba(113,113,122,0.08)', border: 'rgba(113,113,122,0.2)' };
 
   return (
     <div
       style={{
-        background: 'rgba(140,92,255,0.04)',
-        border: '1px solid rgba(140,92,255,0.12)',
-        borderRadius: '14px',
+        background: '#111111',
+        border: '1px solid #222222',
+        borderRadius: '12px',
         padding: '16px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         gap: '12px',
         cursor: 'pointer',
-        transition: 'all 0.2s ease',
+        transition: 'all 0.15s ease',
         position: 'relative',
       }}
       onMouseEnter={e => {
-        (e.currentTarget as HTMLDivElement).style.border = '1px solid rgba(140,92,255,0.35)';
-        (e.currentTarget as HTMLDivElement).style.background = 'rgba(140,92,255,0.08)';
-        (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-2px)';
-        (e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 24px rgba(140,92,255,0.15)';
+        (e.currentTarget as HTMLDivElement).style.border = '1px solid #333333';
+        (e.currentTarget as HTMLDivElement).style.background = '#161616';
+        (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-1px)';
+        (e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 16px rgba(0,0,0,0.4)';
       }}
       onMouseLeave={e => {
-        (e.currentTarget as HTMLDivElement).style.border = '1px solid rgba(140,92,255,0.12)';
-        (e.currentTarget as HTMLDivElement).style.background = 'rgba(140,92,255,0.04)';
+        (e.currentTarget as HTMLDivElement).style.border = '1px solid #222222';
+        (e.currentTarget as HTMLDivElement).style.background = '#111111';
         (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
         (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
       }}
@@ -48,13 +48,13 @@ export default function GFXCard({ name, image, IsDLC, IsMod }: GFXCardProps) {
         top: '10px',
         right: '10px',
         fontSize: '9px',
-        fontWeight: 600,
-        letterSpacing: '0.05em',
+        fontWeight: 500,
+        letterSpacing: '0.04em',
         color: badge.color,
         background: badge.bg,
         border: `1px solid ${badge.border}`,
-        borderRadius: '6px',
-        padding: '3px 7px',
+        borderRadius: '4px',
+        padding: '2px 6px',
       }}>
         {badge.label}
       </span>
@@ -77,7 +77,7 @@ export default function GFXCard({ name, image, IsDLC, IsMod }: GFXCardProps) {
       {/* Name */}
       <span style={{
         fontSize: '11px',
-        color: '#a0a0a0',
+        color: '#888888',
         textAlign: 'center',
         lineHeight: 1.4,
         maxWidth: '100%',

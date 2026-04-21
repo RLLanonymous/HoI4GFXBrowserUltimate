@@ -30,4 +30,4 @@ function walk(dir) {
 
 walk(GFX_DIR);
 writeFileSync(OUTPUT, JSON.stringify(entries, null, 2));
-console.log(`index.info.json has been successfully generated: ${entries.length} assets generated`);
+console.log(`[✓] index.info.json has been generated! ${entries.length} Assets generated !`);
