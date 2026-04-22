@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node scripts/build-index.mjs && next dev",
-    "build": "node scripts/build-index.mjs && next build",
-    "build:index": "node scripts/build-index.mjs",
+    "dev": "tsx scripts/build-index.mts && next dev",
+    "build": "tsx scripts/build-index.mts && next build",
+    "build:index": "tsx scripts/build-index.mts",
     "start": "next start",
     "lint": "eslint"
   },
@@ -32,6 +32,7 @@
     "eslint-config-next": "16.2.4",
     "imagemagick-cli": "^0.5.0",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

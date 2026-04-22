@@ -3,16 +3,30 @@ import { join } from "path"
 import { execSync } from "child_process"
 import { platform } from "os"
 
-const BASE_PATH = process.env.BASE_PATH || ""
-const GFX_DIR = join(process.cwd(), "public/gfx")
-const OUTPUT = join(process.cwd(), "public/gfx/index.info.json")
+const BASE_PATH: string = process.env.BASE_PATH || ""
+const GFX_DIR: string = join(process.cwd(), "public/gfx")
+const OUTPUT: string = join(process.cwd(), "public/gfx/index.info.json")
 
-const SUPPORTED_FORMATS = [".png", ".dds", ".tga"]
-const NEEDS_PREVIEW = [".dds", ".tga"]
+const SUPPORTED_FORMATS: string[] = [".png", ".dds", ".tga"]
+const NEEDS_PREVIEW: string[] = [".dds", ".tga"]
 
-const entries = []
+interface GFXEntry {
+  name: string
+  format: string
+  source: string
+  type: string
+  country_tag: string
+  IsMod: boolean
+  IsDLC: boolean
+  DLCId: string | null
+  mod_id: string | null
+  image: string
+  original: string
+}
 
-function generatePreview(fullPath, previewPath) {
+const entries: GFXEntry[] = []
+
+function generatePreview(fullPath: string, previewPath: string): void {
   if (existsSync(previewPath)) return
   try {
     const cmd = platform() === "win32"
@@ -20,14 +34,15 @@ function generatePreview(fullPath, previewPath) {
       : `convert "${fullPath}" "${previewPath}"`
     execSync(cmd, { stdio: "pipe" })
     console.log(`  [preview] ${previewPath}`)
-  } catch (e) {
+  } catch (e: unknown) {
+    const err = e as { message: string; stderr?: Buffer }
     console.warn(`  [warn] preview failed for ${fullPath}`)
-    console.warn(`  [error] ${e.message}`)
-    console.warn(`  [stderr] ${e.stderr?.toString()}`)
+    console.warn(`  [error] ${err.message}`)
+    console.warn(`  [stderr] ${err.stderr?.toString()}`)
   }
 }
 
-function walk(dir) {
+function walk(dir: string): void {
   for (const entry of readdirSync(dir)) {
     const full = join(dir, entry)
 
@@ -35,6 +50,9 @@ function walk(dir) {
       walk(full)
       continue
     }
+
+    // Ignore les previews générés
+    if (entry.includes(".preview.")) continue
 
     const ext = entry.slice(entry.lastIndexOf(".")).toLowerCase()
     if (!SUPPORTED_FORMATS.includes(ext)) continue
@@ -53,8 +71,8 @@ function walk(dir) {
 
     let IsMod = false
     let IsDLC = false
-    let DLCId = null
-    let mod_id = null
+    let DLCId: string | null = null
+    let mod_id: string | null = null
 
     if (source === "MOD") {
       IsMod = true
@@ -64,7 +82,6 @@ function walk(dir) {
       DLCId = parts[1]
     }
 
-    // Génère preview PNG si nécessaire
     let previewRel = rel
     if (NEEDS_PREVIEW.includes(ext)) {
       const previewFilename = basename + ".preview.png"

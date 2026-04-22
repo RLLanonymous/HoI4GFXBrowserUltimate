@@ -3,8 +3,8 @@
 import { useState } from "react"
 import { BASE_PATH } from "../../config/site"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { CheckCircle2Icon, DownloadIcon } from "lucide-react"
-import { FiCopy } from "react-icons/fi"
+import { DownloadIcon } from "lucide-react"
+import { FiCopy, FiDownload } from "react-icons/fi"
 
 interface GFXCardProps {
   name: string
@@ -29,6 +29,11 @@ export default function GFXCard({ name, image, original, format, IsDLC, IsMod }:
       ? image
       : `${BASE_PATH}${image}`
 
+  const finalOriginal =
+    original.startsWith("http") || original.startsWith(BASE_PATH)
+      ? original
+      : `${BASE_PATH}${original}`
+
   function handleClick() {
     navigator.clipboard.writeText(name)
     setCopied(true)
@@ -38,9 +43,7 @@ export default function GFXCard({ name, image, original, format, IsDLC, IsMod }:
   function handleDownload(e: React.MouseEvent) {
     e.stopPropagation()
     const a = document.createElement("a")
-    a.href = original.startsWith("http") || original.startsWith(BASE_PATH)
-      ? original
-      : `${BASE_PATH}${original}`
+    a.href = finalOriginal
     a.download = `${name}.${format}`
     a.click()
   }
@@ -99,7 +102,7 @@ export default function GFXCard({ name, image, original, format, IsDLC, IsMod }:
         {/* Download button */}
         <button
           onClick={handleDownload}
-          title="Download"
+          title={`Download .${format}`}
           style={{
             position: "absolute",
             top: "10px",
@@ -127,7 +130,7 @@ export default function GFXCard({ name, image, original, format, IsDLC, IsMod }:
             ;(e.currentTarget as HTMLButtonElement).style.borderColor = "#333"
           }}
         >
-          <DownloadIcon size={11} />
+          <FiDownload size={11} />
         </button>
 
         {/* Badge */}
@@ -149,7 +152,21 @@ export default function GFXCard({ name, image, original, format, IsDLC, IsMod }:
 
         {/* Image */}
         <div style={{ width: "72px", height: "72px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <img src={finalImage} alt={name} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+          <img
+            src={finalImage}
+            alt={name}
+            style={{ width: "100%", height: "100%", objectFit: "contain" }}
+            onError={(e) => {
+              const el = e.currentTarget as HTMLImageElement
+              el.style.display = "none"
+              el.parentElement!.innerHTML = `
+                <div style="width:72px;height:72px;border:1px dashed #333;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
+                  <span style="font-size:9px;color:#525252;font-family:monospace">.${format}</span>
+                  <span style="font-size:8px;color:#333;font-family:monospace">no preview</span>
+                </div>
+              `
+            }}
+          />
         </div>
 
         {/* Name */}
