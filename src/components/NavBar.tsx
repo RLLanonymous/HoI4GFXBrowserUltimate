@@ -47,7 +47,7 @@ export default function NavBar() {
           </div>
 
           <div className="hidden xl:flex items-center gap-3">
-            <SearchBar placeholder="Search documentation..." />
+            <SearchBar placeholder="Search assets by name..." />
             <Button
               variant="outline"
               size="sm"

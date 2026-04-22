@@ -1,14 +1,24 @@
 [
   {
+    "name": "RUS_tsardom",
+    "source": "MOD",
     "type": "flags",
     "country_tag": "SOV",
-    "info": "/gfx/flags/SOV/RUS_tsardom.info.json",
-    "image": "/gfx/flags/SOV/RUS_tsardom.png"
+    "IsMod": true,
+    "IsDLC": false,
+    "DLCId": null,
+    "mod_id": "RussiaFanMode",
+    "image": "/gfx/MOD/RussiaFanMode/flags/SOV/RUS_tsardom.png"
   },
   {
+    "name": "ger_great_red_menace",
+    "source": "Vanilla",
     "type": "focus",
     "country_tag": "GER",
-    "info": "/gfx/focus/GER/ger_great_red_menace.info.json",
-    "image": "/gfx/focus/GER/ger_great_red_menace.png"
+    "IsMod": false,
+    "IsDLC": false,
+    "DLCId": null,
+    "mod_id": null,
+    "image": "/gfx/Vanilla/focus/GER/ger_great_red_menace.png"
   }
 ]

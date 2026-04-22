@@ -4,22 +4,17 @@ import { useEffect, useState } from "react"
 import GFXCard from "./GFXCard"
 import { BASE_PATH } from "../../config/site"
 
-fetch(`${BASE_PATH}/gfx/index.info.json`)
-
-interface IndexEntry {
-  info: string
+interface GFXAsset {
+  name: string
   image: string
   type: string
   country_tag: string
-}
-
-interface GFXInfo {
-  name: string
-  IsDLC: boolean
+  source: "Vanilla" | "DLC" | "MOD"
   IsMod: boolean
+  IsDLC: boolean
+  DLCId: string | null
+  mod_id: string | null
 }
-
-interface GFXAsset extends IndexEntry, GFXInfo {}
 
 interface GFXGridProps {
   filterType?: string
@@ -43,42 +38,24 @@ export default function GFXGrid({
     async function load() {
       try {
         const res = await fetch(`${BASE_PATH}/gfx/index.info.json`)
-        const index: IndexEntry[] = await res.json()
+        const index: GFXAsset[] = await res.json()
 
         const filtered = index.filter((entry) => {
           if (filterType && entry.type !== filterType) return false
-          if (
-            filterCountryTag &&
-            entry.country_tag !== filterCountryTag
-          )
-            return false
+          if (filterCountryTag && entry.country_tag !== filterCountryTag) return false
+          if (filterMod !== undefined && entry.IsMod !== filterMod) return false
+          if (filterDLC !== undefined && entry.IsDLC !== filterDLC) return false
           return true
         })
 
-        const full = await Promise.all(
-          filtered.map(async (entry) => {
-            const infoRes = await fetch(entry.info)
-            const info: GFXInfo = await infoRes.json()
-            return { ...entry, ...info }
-          })
-        )
-
         const seen = new Set<string>()
-        const deduplicated = full.filter((a) => {
+        const deduplicated = filtered.filter((a) => {
           if (seen.has(a.image)) return false
           seen.add(a.image)
           return true
         })
 
-        const final = deduplicated.filter((a) => {
-          if (filterMod !== undefined && a.IsMod !== filterMod)
-            return false
-          if (filterDLC !== undefined && a.IsDLC !== filterDLC)
-            return false
-          return true
-        })
-
-        setAssets(final)
+        setAssets(deduplicated)
       } catch (e) {
         console.error("Failed to load GFX:", e)
       } finally {
@@ -90,9 +67,7 @@ export default function GFXGrid({
   }, [filterType, filterCountryTag, filterMod, filterDLC])
 
   const displayed = search
-    ? assets.filter((a) =>
-        a.name.toLowerCase().includes(search.toLowerCase())
-      )
+    ? assets.filter((a) => a.name.toLowerCase().includes(search.toLowerCase()))
     : assets
 
   if (loading)
@@ -112,12 +87,8 @@ export default function GFXGrid({
   return (
     <div>
       <p className="text-xs text-[#525252] mb-4">
-        <span className="text-white font-semibold">
-          {displayed.length}
-        </span>{" "}
-        assets found
+        <span className="text-white font-semibold">{displayed.length}</span> assets found
       </p>
-
       <div className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-3">
         {displayed.map((asset) => (
           <GFXCard
