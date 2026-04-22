@@ -1,6 +1,7 @@
 import { readdirSync, writeFileSync, statSync, existsSync } from "fs"
 import { join } from "path"
 import { execSync } from "child_process"
+import { platform } from "os"
 
 const BASE_PATH = process.env.BASE_PATH || ""
 const GFX_DIR = join(process.cwd(), "public/gfx")
