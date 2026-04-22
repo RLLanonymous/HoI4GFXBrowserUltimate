@@ -17,8 +17,6 @@ interface GFXEntry {
   type: string
   country_tag: string
   IsMod: boolean
-  IsDLC: boolean
-  DLCId: string | null
   mod_id: string | null
   image: string
   original: string
@@ -76,9 +74,6 @@ function walk(dir: string): void {
     if (source === "MOD") {
       IsMod = true
       mod_id = parts[1]
-    } else if (source === "DLC") {
-      IsDLC = true
-      DLCId = parts[1]
     }
 
     let previewRel = rel
@@ -96,8 +91,6 @@ function walk(dir: string): void {
       type,
       country_tag,
       IsMod,
-      IsDLC,
-      DLCId,
       mod_id,
       image: `${BASE_PATH}/gfx/${previewRel}`,
       original: `${BASE_PATH}/gfx/${rel}`,

@@ -13,8 +13,6 @@ interface GFXAsset {
   country_tag: string
   source: "Vanilla" | "DLC" | "MOD"
   IsMod: boolean
-  IsDLC: boolean
-  DLCId: string | null
   mod_id: string | null
 }
 
@@ -22,7 +20,6 @@ interface GFXGridProps {
   filterType?: string
   filterCountryTag?: string
   filterMod?: boolean
-  filterDLC?: boolean
   search?: string
 }
 
@@ -30,7 +27,6 @@ export default function GFXGrid({
   filterType,
   filterCountryTag,
   filterMod,
-  filterDLC,
   search,
 }: GFXGridProps) {
   const [assets, setAssets] = useState<GFXAsset[]>([])
@@ -46,7 +42,6 @@ export default function GFXGrid({
           if (filterType && entry.type !== filterType) return false
           if (filterCountryTag && entry.country_tag !== filterCountryTag) return false
           if (filterMod !== undefined && entry.IsMod !== filterMod) return false
-          if (filterDLC !== undefined && entry.IsDLC !== filterDLC) return false
           return true
         })
 
@@ -66,7 +61,7 @@ export default function GFXGrid({
     }
 
     load()
-  }, [filterType, filterCountryTag, filterMod, filterDLC])
+  }, [filterType, filterCountryTag, filterMod])
 
   const displayed = search
     ? assets.filter((a) => a.name.toLowerCase().includes(search.toLowerCase()))
@@ -99,7 +94,6 @@ export default function GFXGrid({
           image={asset.image}
           original={asset.original}
           format={asset.format}
-          IsDLC={asset.IsDLC}
           IsMod={asset.IsMod}
         />
         ))}

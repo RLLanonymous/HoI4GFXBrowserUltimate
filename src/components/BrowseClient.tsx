@@ -7,7 +7,7 @@ import { FiSearch } from "react-icons/fi";
 
 const GFX_TYPES = ["All", "focus", "ideas", "ideology", "portrait", "flags"];
 const COUNTRY_TAGS = ["All", "GER", "FRA", "ENG", "SOV", "USA", "ITA", "JAP"];
-const SOURCES = ["All", "Vanilla", "DLC", "Mod"];
+const SOURCES = ["All", "Vanilla", "Mod"];
 
 export default function BrowseClient() {
   const searchParams = useSearchParams();
@@ -15,7 +15,6 @@ export default function BrowseClient() {
   const [filterType, setFilterType] = useState<string | undefined>(undefined);
   const [filterTag, setFilterTag] = useState<string | undefined>(undefined);
   const [filterMod, setFilterMod] = useState<boolean | undefined>(undefined);
-  const [filterDLC, setFilterDLC] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
     const q = searchParams.get("q");
@@ -23,13 +22,12 @@ export default function BrowseClient() {
   }, [searchParams]);
 
   function handleSource(src: string) {
-    if (src === "All")      { setFilterMod(undefined); setFilterDLC(undefined); }
-    else if (src === "Mod") { setFilterMod(true);      setFilterDLC(undefined); }
-    else if (src === "DLC") { setFilterMod(undefined); setFilterDLC(true); }
-    else                    { setFilterMod(false);     setFilterDLC(false); }
+    if (src === "All")      { setFilterMod(undefined);}
+    else if (src === "Mod") { setFilterMod(true);}
+    else                    { setFilterMod(false);}
   }
 
-  const activeSource = filterMod === true ? "Mod" : filterDLC === true ? "DLC" : filterMod === false ? "Vanilla" : "All";
+  const activeSource = filterMod === true ? "Mod" : filterMod === false ? "Vanilla" : "All";
 
   return (
     <div style={{ flex: 1, display: 'flex', position: 'relative', zIndex: 10 }}>
@@ -121,7 +119,6 @@ export default function BrowseClient() {
           filterType={filterType}
           filterCountryTag={filterTag}
           filterMod={filterMod}
-          filterDLC={filterDLC}
           search={search}
         />
       </main>
