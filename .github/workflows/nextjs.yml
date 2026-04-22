@@ -55,14 +55,10 @@ jobs:
           convert --version
 
       - name: Build index
-        run: BASE_PATH=/HoI4GFXBrowserUltimate node scripts/build-index.mjs
+        run: BASE_PATH=/HoI4GFXBrowserUltimate pnpm tsx scripts/build-index.mts
 
       - name: Build Next.js
         run: NEXT_PUBLIC_BASE_PATH=/HoI4GFXBrowserUltimate pnpm next build
-
-      - name: Check exported files
-        run: |
-          ls -R out
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
