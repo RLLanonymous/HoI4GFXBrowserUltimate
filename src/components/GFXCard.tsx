@@ -1,80 +1,137 @@
 "use client"
 
+import { useState } from "react"
 import { BASE_PATH } from "../../config/site"
-
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { CheckCircle2Icon, DownloadIcon } from "lucide-react"
+import { FiCopy } from "react-icons/fi"
 
 interface GFXCardProps {
   name: string
   image: string
+  original: string
+  format: string
   IsDLC: boolean
   IsMod: boolean
 }
 
-export default function GFXCard({
-  name,
-  image,
-  IsDLC,
-  IsMod,
-}: GFXCardProps) {
-  const badge = IsMod
-    ? {
-        label: "MOD",
-        color: "#a78bfa",
-        bg: "rgba(167,139,250,0.08)",
-        border: "rgba(167,139,250,0.2)",
-      }
-    : IsDLC
-    ? {
-        label: "DLC",
-        color: "#34d399",
-        bg: "rgba(52,211,153,0.08)",
-        border: "rgba(52,211,153,0.2)",
-      }
-    : {
-        label: "Vanilla",
-        color: "#71717a",
-        bg: "rgba(113,113,122,0.08)",
-        border: "rgba(113,113,122,0.2)",
-      }
+export default function GFXCard({ name, image, original, format, IsDLC, IsMod }: GFXCardProps) {
+  const [copied, setCopied] = useState(false)
 
-    const finalImage =
-        image.startsWith("http") || image.startsWith(BASE_PATH)
-          ? image
-          : `${BASE_PATH}${image}`
+  const badge = IsMod
+    ? { label: "MOD", color: "#a78bfa", bg: "rgba(167,139,250,0.08)", border: "rgba(167,139,250,0.2)" }
+    : IsDLC
+    ? { label: "DLC", color: "#34d399", bg: "rgba(52,211,153,0.08)", border: "rgba(52,211,153,0.2)" }
+    : { label: "Vanilla", color: "#71717a", bg: "rgba(113,113,122,0.08)", border: "rgba(113,113,122,0.2)" }
+
+  const finalImage =
+    image.startsWith("http") || image.startsWith(BASE_PATH)
+      ? image
+      : `${BASE_PATH}${image}`
+
+  function handleClick() {
+    navigator.clipboard.writeText(name)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  function handleDownload(e: React.MouseEvent) {
+    e.stopPropagation()
+    const a = document.createElement("a")
+    a.href = original.startsWith("http") || original.startsWith(BASE_PATH)
+      ? original
+      : `${BASE_PATH}${original}`
+    a.download = `${name}.${format}`
+    a.click()
+  }
 
   return (
-    <div
-      style={{
-        background: "#111111",
-        border: "1px solid #222222",
-        borderRadius: "12px",
-        padding: "16px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "12px",
-        cursor: "pointer",
-        transition: "all 0.15s ease",
-        position: "relative",
-      }}
-      onMouseEnter={(e) => {
-        const el = e.currentTarget as HTMLDivElement
-        el.style.border = "1px solid #333333"
-        el.style.background = "#161616"
-        el.style.transform = "translateY(-1px)"
-        el.style.boxShadow = "0 4px 16px rgba(0,0,0,0.4)"
-      }}
-      onMouseLeave={(e) => {
-        const el = e.currentTarget as HTMLDivElement
-        el.style.border = "1px solid #222222"
-        el.style.background = "#111111"
-        el.style.transform = "translateY(0)"
-        el.style.boxShadow = "none"
-      }}
-    >
-      {/* Badge */}
-      <span
+    <>
+      {copied && (
+        <div style={{
+          position: "fixed",
+          bottom: "80px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 99999,
+          minWidth: "300px",
+        }}>
+          <Alert className="bg-black border-[#222] text-white shadow-2xl">
+            <FiCopy className="text-[#34d399]" />
+            <AlertTitle className="text-white">Copied to clipboard</AlertTitle>
+            <AlertDescription className="text-[#888]">
+              <span className="font-mono text-[11px]">{name}</span>
+            </AlertDescription>
+          </Alert>
+        </div>
+      )}
+
+      <div
+        onClick={handleClick}
         style={{
+          background: "#111111",
+          border: "1px solid #222222",
+          borderRadius: "12px",
+          padding: "16px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "12px",
+          cursor: "pointer",
+          transition: "all 0.15s ease",
+          position: "relative",
+        }}
+        onMouseEnter={(e) => {
+          const el = e.currentTarget as HTMLDivElement
+          el.style.border = "1px solid #333333"
+          el.style.background = "#161616"
+          el.style.transform = "translateY(-1px)"
+          el.style.boxShadow = "0 4px 16px rgba(0,0,0,0.4)"
+        }}
+        onMouseLeave={(e) => {
+          const el = e.currentTarget as HTMLDivElement
+          el.style.border = "1px solid #222222"
+          el.style.background = "#111111"
+          el.style.transform = "translateY(0)"
+          el.style.boxShadow = "none"
+        }}
+      >
+        {/* Download button */}
+        <button
+          onClick={handleDownload}
+          title="Download"
+          style={{
+            position: "absolute",
+            top: "10px",
+            left: "10px",
+            width: "22px",
+            height: "22px",
+            borderRadius: "4px",
+            border: "1px solid #333",
+            background: "#1a1a1a",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            transition: "all 0.15s",
+            color: "#888",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background = "#222"
+            ;(e.currentTarget as HTMLButtonElement).style.color = "#fff"
+            ;(e.currentTarget as HTMLButtonElement).style.borderColor = "#444"
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background = "#1a1a1a"
+            ;(e.currentTarget as HTMLButtonElement).style.color = "#888"
+            ;(e.currentTarget as HTMLButtonElement).style.borderColor = "#333"
+          }}
+        >
+          <DownloadIcon size={11} />
+        </button>
+
+        {/* Badge */}
+        <span style={{
           position: "absolute",
           top: "10px",
           right: "10px",
@@ -86,31 +143,17 @@ export default function GFXCard({
           border: `1px solid ${badge.border}`,
           borderRadius: "4px",
           padding: "2px 6px",
-        }}
-      >
-        {badge.label}
-      </span>
+        }}>
+          {badge.label}
+        </span>
 
-      {/* Image */}
-      <div
-        style={{
-          width: "72px",
-          height: "72px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <img
-          src={finalImage}
-          alt={name}
-          style={{ width: "100%", height: "100%", objectFit: "contain" }}
-        />
-      </div>
+        {/* Image */}
+        <div style={{ width: "72px", height: "72px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <img src={finalImage} alt={name} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+        </div>
 
-      {/* Name */}
-      <span
-        style={{
+        {/* Name */}
+        <span style={{
           fontSize: "11px",
           color: "#888888",
           textAlign: "center",
@@ -119,10 +162,10 @@ export default function GFXCard({
           overflow: "hidden",
           textOverflow: "ellipsis",
           whiteSpace: "nowrap",
-        }}
-      >
-        {name}
-      </span>
-    </div>
+        }}>
+          {name}
+        </span>
+      </div>
+    </>
   )
 }

@@ -1,6 +1,20 @@
 [
   {
+    "name": "BEL_neutrality",
+    "format": "tga",
+    "source": "DLC",
+    "type": "flags",
+    "country_tag": "BEL",
+    "IsMod": false,
+    "IsDLC": true,
+    "DLCId": "Gotterdamenrung",
+    "mod_id": null,
+    "image": "/gfx/DLC/Gotterdamenrung/flags/BEL/BEL_neutrality.preview.png",
+    "original": "/gfx/DLC/Gotterdamenrung/flags/BEL/BEL_neutrality.tga"
+  },
+  {
     "name": "RUS_tsardom",
+    "format": "png",
     "source": "MOD",
     "type": "flags",
     "country_tag": "SOV",
@@ -8,10 +22,12 @@
     "IsDLC": false,
     "DLCId": null,
     "mod_id": "RussiaFanMode",
-    "image": "/gfx/MOD/RussiaFanMode/flags/SOV/RUS_tsardom.png"
+    "image": "/gfx/MOD/RussiaFanMode/flags/SOV/RUS_tsardom.png",
+    "original": "/gfx/MOD/RussiaFanMode/flags/SOV/RUS_tsardom.png"
   },
   {
     "name": "ger_great_red_menace",
+    "format": "png",
     "source": "Vanilla",
     "type": "focus",
     "country_tag": "GER",
@@ -19,6 +35,7 @@
     "IsDLC": false,
     "DLCId": null,
     "mod_id": null,
-    "image": "/gfx/Vanilla/focus/GER/ger_great_red_menace.png"
+    "image": "/gfx/Vanilla/focus/GER/ger_great_red_menace.png",
+    "original": "/gfx/Vanilla/focus/GER/ger_great_red_menace.png"
   }
 ]

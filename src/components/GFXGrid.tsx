@@ -7,7 +7,9 @@ import { BASE_PATH } from "../../config/site"
 interface GFXAsset {
   name: string
   image: string
+  original: string
   type: string
+  format: string
   country_tag: string
   source: "Vanilla" | "DLC" | "MOD"
   IsMod: boolean
@@ -91,13 +93,15 @@ export default function GFXGrid({
       </p>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-3">
         {displayed.map((asset) => (
-          <GFXCard
-            key={asset.image}
-            name={asset.name}
-            image={asset.image}
-            IsDLC={asset.IsDLC}
-            IsMod={asset.IsMod}
-          />
+        <GFXCard
+          key={asset.image}
+          name={asset.name}
+          image={asset.image}
+          original={asset.original}
+          format={asset.format}
+          IsDLC={asset.IsDLC}
+          IsMod={asset.IsMod}
+        />
         ))}
       </div>
     </div>
