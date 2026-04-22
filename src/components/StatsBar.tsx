@@ -5,16 +5,16 @@ import { FaGithub } from "react-icons/fa";
 import { FiBookOpen, FiInfo } from "react-icons/fi";
 
 const stats = [
-  { value: "0", label: "total assets", color: "#ffffff" },
+  { value: "0", label: "assets", color: "#ffffff" },
   { value: "0", label: "vanilla", color: "#ffffff" },
-  { value: "0", label: "mod", color: "#ffffff" },
-  { value: "0", label: "nations", color: "#ffffff" },
+  { value: "0", label: "DLC", color: "#ffffff" },
+  { value: "0", label: "modded", color: "#ffffff" },
 ];
 
 const footerLinks = [
   { label: "GitHub", icon: FaGithub, href: "https://github.com/RLLanonymous/HoI4GFXBrowserUltimate" },
-  { label: "Docs", icon: FiBookOpen, href: "#" },
-  { label: "About", icon: FiInfo, href: "#" },
+  { label: "Docs", icon: FiBookOpen, href: "/docs" },
+  { label: "About", icon: FiInfo, href: "/about" },
 ];
 
 export default function StatsBar() {
@@ -25,7 +25,7 @@ export default function StatsBar() {
     >
       <div className="flex flex-col gap-1">
         <span className="text-[13px] font-semibold text-white">GFX Browser Ultimate</span>
-        <span className="text-[11px] text-[#525252]">© 2026 — All rights reserved</span>
+        <span className="text-[11px] text-[#525252]">© 2026, All rights reserved</span>
       </div>
 
       <div className="flex items-center gap-8">

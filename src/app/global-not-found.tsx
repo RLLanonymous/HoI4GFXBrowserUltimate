@@ -48,17 +48,17 @@ export default function GlobalNotFound() {
             {/* Actions */}
             <div className="flex items-center justify-center gap-3">
 
-                <Button
-                asChild
-                size="lg"
-                variant="default"
-                className="!bg-white !text-black hover:!bg-white/90 hover:!text-black gap-2"
-                >
-                <Link href="/">
-                    Go Home
-                    <FiHome size={14} />
-                </Link>
-                </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="default"
+              className="!bg-white !text-black hover:!bg-white/90 hover:!text-black gap-2"
+            >
+              <a href="/">
+                Go Home
+                <FiHome size={14} />
+              </a>
+            </Button>
             </div>
           </div>
         </div>

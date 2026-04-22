@@ -53,7 +53,7 @@ export default function GFXCard({ name, image, original, format, IsDLC, IsMod }:
       {copied && (
         <div style={{
           position: "fixed",
-          bottom: "80px",
+          bottom: "100px",
           left: "50%",
           transform: "translateX(-50%)",
           zIndex: 99999,
@@ -61,7 +61,7 @@ export default function GFXCard({ name, image, original, format, IsDLC, IsMod }:
         }}>
           <Alert className="bg-black border-[#222] text-white shadow-2xl">
             <FiCopy className="text-[#34d399]" />
-            <AlertTitle className="text-white">Copied to clipboard</AlertTitle>
+            <AlertTitle className="text-white">Copied to clipboard !</AlertTitle>
             <AlertDescription className="text-[#888]">
               <span className="font-mono text-[11px]">{name}</span>
             </AlertDescription>

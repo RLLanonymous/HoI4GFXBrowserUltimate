@@ -51,7 +51,6 @@ function walk(dir: string): void {
       continue
     }
 
-    // Ignore les previews générés
     if (entry.includes(".preview.")) continue
 
     const ext = entry.slice(entry.lastIndexOf(".")).toLowerCase()
