@@ -14,10 +14,15 @@ const entries = []
 function generatePreview(fullPath, previewPath) {
   if (existsSync(previewPath)) return
   try {
-    execSync(`magick convert "${fullPath}" "${previewPath}"`, { stdio: "pipe" })
+    const cmd = platform() === "win32"
+      ? `magick convert "${fullPath}" "${previewPath}"`
+      : `convert "${fullPath}" "${previewPath}"`
+    execSync(cmd, { stdio: "pipe" })
     console.log(`  [preview] ${previewPath}`)
   } catch (e) {
     console.warn(`  [warn] preview failed for ${fullPath}`)
+    console.warn(`  [error] ${e.message}`)
+    console.warn(`  [stderr] ${e.stderr?.toString()}`)
   }
 }
 
