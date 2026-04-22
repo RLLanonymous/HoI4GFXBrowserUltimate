@@ -1,7 +1,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import { BASE_PATH } from '../../config/site'
 import { Button } from '@/components/ui/button'
 import { FiArrowRight, FiHome } from 'react-icons/fi'
 import WhiteBackground from '@/components/WhiteBackground'
@@ -54,10 +54,10 @@ export default function GlobalNotFound() {
               variant="default"
               className="!bg-white !text-black hover:!bg-white/90 hover:!text-black gap-2"
             >
-              <a href="/">
-                Go Home
-                <FiHome size={14} />
-              </a>
+            <a href={`${BASE_PATH}/`}>
+              Go Home
+              <FiHome size={14} />
+            </a>
             </Button>
             </div>
           </div>
